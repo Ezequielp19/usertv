@@ -52,7 +52,7 @@
 <br> -->
 
 <ion-content>
-  <ion-item>
+<!--   <ion-item>
     <ion-label>Categoría</ion-label>
     <ion-select [(ngModel)]="selectedCategory" (ionChange)="filterApks()">
       <ion-select-option value="">Todas</ion-select-option>
@@ -60,7 +60,17 @@
         {{ categoria.nombre }}
       </ion-select-option>
     </ion-select>
-  </ion-item>
+  </ion-item> -->
+
+<ion-item>
+  <ion-label>Categoría</ion-label>
+  <ion-select [(ngModel)]="selectedCategory" interface="action-sheet" (ionChange)="filterApks()">
+    <ion-select-option value="">Todas</ion-select-option>
+    <ion-select-option *ngFor="let categoria of categorias$ | async" [value]="categoria.id">
+      {{ categoria.nombre }}
+    </ion-select-option>
+  </ion-select>
+</ion-item>
 
   <ion-list>
     <ion-item
