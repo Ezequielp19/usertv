@@ -46,35 +46,56 @@ constructor(
   }
 
 
-  async login() {
-    if (this.loginForm.valid) {
-      const { dni, password } = this.loginForm.value;
+  // async login() {
+  //   if (this.loginForm.valid) {
+  //     const { dni, password } = this.loginForm.value;
 
-      try {
-        const user = await this.firestoreService.loginUser(dni, password);
-        if (user) {
-          const userId = localStorage.getItem('userId');
-          console.log('Inicio de sesión exitoso:', userId);
-          this.loginSuccess = true;
-          await this.mostrarAlerta('Éxito', 'Inicio de sesión exitoso.');
+  //     try {
+  //       const user = await this.firestoreService.loginUser(dni, password);
+  //       if (user) {
+  //         const userId = localStorage.getItem('userId');
+  //         console.log('Inicio de sesión exitoso:', userId);
+  //         this.loginSuccess = true;
+  //         await this.mostrarAlerta('Éxito', 'Inicio de sesión exitoso.');
 
-          setTimeout(() => {
-            this.router.navigateByUrl('/lista');
+  //         setTimeout(() => {
+  //           this.router.navigateByUrl('/lista');
 
-          }, 1000);
-        } else {
-          this.loginError = true;
-          this.mostrarAlertaError('Credenciales incorrectas. Por favor, inténtalo de nuevo.');
-        }
-      } catch (error) {
-        console.error('Error al iniciar sesión:', error);
-        this.mostrarAlertaError('Ocurrió un error al iniciar sesión.');
+  //         }, 1000);
+  //       } else {
+  //         this.loginError = true;
+  //         this.mostrarAlertaError('Credenciales incorrectas. Por favor, inténtalo de nuevo.');
+  //       }
+  //     } catch (error) {
+  //       console.error('Error al iniciar sesión:', error);
+  //       this.mostrarAlertaError('Ocurrió un error al iniciar sesión.');
+  //     }
+  //   } else {
+  //     this.mostrarAlertaError('Por favor, completa todos los campos correctamente.');
+  //   }
+  // }
+
+
+
+async login() {
+  if (this.loginForm.valid) {
+    const { dni, password } = this.loginForm.value;
+
+    try {
+      const user = await this.firestoreService.loginUser(dni, password);
+      if (user) {
+        console.log('Inicio de sesión exitoso');
+        this.router.navigateByUrl('/lista');
+      } else {
+        console.log('Credenciales incorrectas');
       }
-    } else {
-      this.mostrarAlertaError('Por favor, completa todos los campos correctamente.');
+    } catch (error) {
+      console.error('Error al iniciar sesión:', error);
     }
+  } else {
+    console.log('Formulario inválido');
   }
-
+}
 
 
 
