@@ -59,7 +59,8 @@ constructor(
           await this.mostrarAlerta('Éxito', 'Inicio de sesión exitoso.');
 
           setTimeout(() => {
-            this.router.navigateByUrl('/lista');
+            this.router.navigate(['/lista']);
+
           }, 1000);
         } else {
           this.loginError = true;
