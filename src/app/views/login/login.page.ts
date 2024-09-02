@@ -59,7 +59,7 @@ constructor(
           await this.mostrarAlerta('Éxito', 'Inicio de sesión exitoso.');
 
           setTimeout(() => {
-            this.router.navigate(['/lista']);
+            this.router.navigateByUrl('/lista');
 
           }, 1000);
         } else {
